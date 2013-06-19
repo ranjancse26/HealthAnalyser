@@ -1,0 +1,97 @@
+﻿@model HealthAnalyser.Models.SleepDataViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <h2>Analyse your Health with Chart JS</h2>
+        </div>
+     </section>
+}  
+@{
+    var grid = new WebGrid(Model.SleepDataEntity, canPage: false, canSort: false);
+}
+
+@*http://zurb.com/playground/playground/responsive-tables/index.html*@
+
+<script src="~/Scripts/HealthAnalyserChart.js"></script>
+
+<script type="text/javascript">
+
+    var ChartData = {
+        labels: @Html.Raw(@Model.SleepDataChart.Labels),
+         datasets: [
+             {
+                 fillColor: GenerateRandomColor(0.5),
+                 strokeColor: "rgba(220,220,220,1)",
+                 data: @Model.SleepDataChart.SleepMinituesData
+                 },
+				{
+				    fillColor : GenerateRandomColor(0.5),
+				    strokeColor : "rgba(151,187,205,1)",
+				    data : @Model.SleepDataChart.SettlingMinituesData
+				}
+         ]         
+    }
+
+    function GenerateRandomColor(alpha)
+    {
+        var rgba = new Array();
+        for(var i=0; i<3; i++){
+            rgba.push(Math.ceil(Math.random()*150 + 50));
+        }
+        return 'rgba('+rgba.join(",")+ ',' + alpha + ')';
+    }
+    
+ </script>
+
+@using (Html.BeginForm())
+{   
+    <h2> Sleep Data Analysis</h2> <br />
+    
+    <ul class="nav nav-pills">
+      <li><a href="#" class="btn btn-large btn-primary"  onclick="return ShowBarGraph();" style="color:white">Show Bar Graph</a></li>
+      <li><a href="#" class="btn btn-large btn-primary"  onclick="return ShowLineGraph();" style="color:white">Show Line Graph</a></li>
+      <li><a href="#" class="btn btn-large btn-primary"  onclick="return ShowRadarGraph();" style="color:white">Show Radar Graph</a></li>
+    </ul>
+    <br />  
+    if (Model.SleepDataEntity.Count == 0)
+    {
+        <p>No data found</p>
+    }
+    else
+    {   
+        @grid.GetHtml(htmlAttributes: new { id = "grid" },
+                    tableStyle: "responsive",
+                    columns: grid.Columns(
+                        grid.Column("Date", format: @<text>@item.SleepingDateTime</text>),
+                        grid.Column("Sleeping Minutes", format: @<text>@item.SleepMinutes</text>),
+                        grid.Column("Settling Minutes", format: @<text>@item.SettlingMinutes</text>),
+                        grid.Column("Walk", format: @<text>@item.Walk</text>)
+                        )
+                    )
+        <div id="main" role="main">
+            <canvas id="myChart" width="100" height="100"></canvas>  
+        </div>
+    }   
+    <label id="errorMessage" style="color:red">@ViewBag.Error</label>
+}
+
+<style type="text/css">
+    .table
+    {
+        width: 40%;
+        border: 0px;
+        border-collapse: collapse;
+    }
+
+     #main{ display:block; width:80%;  height:300px; }
+
+     .nav>li>a:hover, .nav>li>a:focus {
+        text-decoration: none;
+        background-color: #04c;
+     }
+</style>
+
+

@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HealthAnalyserModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="HealthAnalyserModelStoreContainer">
+          <EntitySet Name="BloodPressure" EntityType="HealthAnalyserModel.Store.BloodPressure" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Exercise" EntityType="HealthAnalyserModel.Store.Exercise" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SleepData" EntityType="HealthAnalyserModel.Store.SleepData" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Weight" EntityType="HealthAnalyserModel.Store.Weight" store:Type="Tables" store:Schema="dbo" store:Name="Weight">
+            <DefiningQuery>SELECT 
+      [Weight].[Internal_ID] AS [Internal_ID], 
+      [Weight].[Date] AS [Date], 
+      [Weight].[Time] AS [Time], 
+      [Weight].[WeightValue] AS [WeightValue]
+      FROM [dbo].[Weight] AS [Weight]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WeightGoal" EntityType="HealthAnalyserModel.Store.WeightGoal" store:Type="Tables" store:Schema="dbo" store:Name="WeightGoal">
+            <DefiningQuery>SELECT 
+      [WeightGoal].[Internal_ID] AS [Internal_ID], 
+      [WeightGoal].[InitialValue] AS [InitialValue], 
+      [WeightGoal].[MinValue] AS [MinValue], 
+      [WeightGoal].[MaxValue] AS [MaxValue], 
+      [WeightGoal].[Date] AS [Date], 
+      [WeightGoal].[Time] AS [Time]
+      FROM [dbo].[WeightGoal] AS [WeightGoal]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+        <EntityType Name="BloodPressure">
+          <Key>
+            <PropertyRef Name="Internal_ID" />
+          </Key>
+          <Property Name="Internal_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Systolic" Type="int" Nullable="false" />
+          <Property Name="Diastolic" Type="int" Nullable="false" />
+          <Property Name="Pulse" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Exercise">
+          <Key>
+            <PropertyRef Name="Internal_ID" />
+          </Key>
+          <Property Name="Internal_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Activity" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="time" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="Distance" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SleepData">
+          <Key>
+            <PropertyRef Name="Internal_ID" />
+          </Key>
+          <Property Name="Internal_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SleepingDateTime" Type="datetime" Nullable="false" />
+          <Property Name="SleepMinutes" Type="int" Nullable="false" />
+          <Property Name="SettlingMinutes" Type="int" Nullable="false" />
+          <Property Name="Walk" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'HealthAnalyser.dbo.Weight' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Weight">
+          <Key>
+            <PropertyRef Name="Internal_ID" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="WeightValue" />
+          </Key>
+          <Property Name="Internal_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="time" Nullable="false" />
+          <Property Name="WeightValue" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'HealthAnalyser.dbo.WeightGoal' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="WeightGoal">
+          <Key>
+            <PropertyRef Name="Internal_ID" />
+            <PropertyRef Name="InitialValue" />
+            <PropertyRef Name="MinValue" />
+            <PropertyRef Name="MaxValue" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Time" />
+          </Key>
+          <Property Name="Internal_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InitialValue" Type="int" Nullable="false" />
+          <Property Name="MinValue" Type="int" Nullable="false" />
+          <Property Name="MaxValue" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="time" Nullable="false" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HealthAnalyserModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HealthAnalyserEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="SleepData" EntityType="HealthAnalyserModel.SleepData" />
+          <EntitySet Name="Exercise" EntityType="HealthAnalyserModel.Exercise" />
+          <EntitySet Name="BloodPressure" EntityType="HealthAnalyserModel.BloodPressure" />
+          <EntitySet Name="Weight" EntityType="HealthAnalyserModel.Weight" />
+          <EntitySet Name="WeightGoal" EntityType="HealthAnalyserModel.WeightGoal" />
+        </EntityContainer>
+        <EntityType Name="SleepData">
+          <Key>
+            <PropertyRef Name="Internal_ID" />
+          </Key>
+          <Property Type="Int32" Name="Internal_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="SleepingDateTime" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="SleepMinutes" Nullable="false" />
+          <Property Type="Int32" Name="SettlingMinutes" Nullable="false" />
+          <Property Type="Int32" Name="Walk" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Exercise">
+          <Key>
+            <PropertyRef Name="Internal_ID" />
+          </Key>
+          <Property Type="Int32" Name="Internal_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Activity" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="0" />
+          <Property Type="Time" Name="Time" Nullable="false" Precision="7" />
+          <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Duration" Nullable="false" />
+          <Property Type="Int32" Name="Distance" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BloodPressure">
+          <Key>
+            <PropertyRef Name="Internal_ID" />
+          </Key>
+          <Property Type="Int32" Name="Internal_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="0" />
+          <Property Type="Int32" Name="Systolic" Nullable="false" />
+          <Property Type="Int32" Name="Diastolic" Nullable="false" />
+          <Property Type="Int32" Name="Pulse" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Weight">
+          <Key>
+            <PropertyRef Name="Internal_ID" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="WeightValue" />
+          </Key>
+          <Property Type="Int32" Name="Internal_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="0" />
+          <Property Type="Time" Name="Time" Nullable="false" Precision="7" />
+          <Property Type="Int32" Name="WeightValue" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WeightGoal">
+          <Key>
+            <PropertyRef Name="Internal_ID" />
+            <PropertyRef Name="InitialValue" />
+            <PropertyRef Name="MinValue" />
+            <PropertyRef Name="MaxValue" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Time" />
+          </Key>
+          <Property Type="Int32" Name="Internal_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="InitialValue" Nullable="false" />
+          <Property Type="Int32" Name="MinValue" Nullable="false" />
+          <Property Type="Int32" Name="MaxValue" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="0" />
+          <Property Type="Time" Name="Time" Nullable="false" Precision="7" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HealthAnalyserModelStoreContainer" CdmEntityContainer="HealthAnalyserEntities">
+          <EntitySetMapping Name="SleepData">
+            <EntityTypeMapping TypeName="HealthAnalyserModel.SleepData">
+              <MappingFragment StoreEntitySet="SleepData">
+                <ScalarProperty Name="Walk" ColumnName="Walk" />
+                <ScalarProperty Name="SettlingMinutes" ColumnName="SettlingMinutes" />
+                <ScalarProperty Name="SleepMinutes" ColumnName="SleepMinutes" />
+                <ScalarProperty Name="SleepingDateTime" ColumnName="SleepingDateTime" />
+                <ScalarProperty Name="Internal_ID" ColumnName="Internal_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exercise">
+            <EntityTypeMapping TypeName="HealthAnalyserModel.Exercise">
+              <MappingFragment StoreEntitySet="Exercise">
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Activity" ColumnName="Activity" />
+                <ScalarProperty Name="Internal_ID" ColumnName="Internal_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BloodPressure">
+            <EntityTypeMapping TypeName="HealthAnalyserModel.BloodPressure">
+              <MappingFragment StoreEntitySet="BloodPressure">
+                <ScalarProperty Name="Pulse" ColumnName="Pulse" />
+                <ScalarProperty Name="Diastolic" ColumnName="Diastolic" />
+                <ScalarProperty Name="Systolic" ColumnName="Systolic" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Internal_ID" ColumnName="Internal_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Weight">
+            <EntityTypeMapping TypeName="HealthAnalyserModel.Weight">
+              <MappingFragment StoreEntitySet="Weight">
+                <ScalarProperty Name="WeightValue" ColumnName="WeightValue" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Internal_ID" ColumnName="Internal_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeightGoal">
+            <EntityTypeMapping TypeName="HealthAnalyserModel.WeightGoal">
+              <MappingFragment StoreEntitySet="WeightGoal">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="MaxValue" ColumnName="MaxValue" />
+                <ScalarProperty Name="MinValue" ColumnName="MinValue" />
+                <ScalarProperty Name="InitialValue" ColumnName="InitialValue" />
+                <ScalarProperty Name="Internal_ID" ColumnName="Internal_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

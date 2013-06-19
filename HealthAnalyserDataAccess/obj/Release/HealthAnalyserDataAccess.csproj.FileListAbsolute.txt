@@ -1,0 +1,8 @@
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\HealthAnalyser\HealthAnalyserDataAccess\bin\Release\HealthAnalyserDataAccess.dll.config
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\HealthAnalyser\HealthAnalyserDataAccess\bin\Release\HealthAnalyserDataAccess.dll
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\HealthAnalyser\HealthAnalyserDataAccess\bin\Release\HealthAnalyserDataAccess.pdb
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\HealthAnalyser\HealthAnalyserDataAccess\bin\Release\EntityFramework.dll
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\HealthAnalyser\HealthAnalyserDataAccess\bin\Release\EntityFramework.xml
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\HealthAnalyser\HealthAnalyserDataAccess\obj\Release\HealthAnalyserDataAccess.csprojResolveAssemblyReference.cache
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\HealthAnalyser\HealthAnalyserDataAccess\obj\Release\HealthAnalyserDataAccess.dll
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\HealthAnalyser\HealthAnalyserDataAccess\obj\Release\HealthAnalyserDataAccess.pdb

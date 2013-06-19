@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HealthAnalyserModelStoreContainer" CdmEntityContainer="HealthAnalyserEntities">
+    <EntitySetMapping Name="SleepData">
+      <EntityTypeMapping TypeName="HealthAnalyserModel.SleepData">
+        <MappingFragment StoreEntitySet="SleepData">
+          <ScalarProperty Name="Walk" ColumnName="Walk" />
+          <ScalarProperty Name="SettlingMinutes" ColumnName="SettlingMinutes" />
+          <ScalarProperty Name="SleepMinutes" ColumnName="SleepMinutes" />
+          <ScalarProperty Name="SleepingDateTime" ColumnName="SleepingDateTime" />
+          <ScalarProperty Name="Internal_ID" ColumnName="Internal_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Exercise">
+      <EntityTypeMapping TypeName="HealthAnalyserModel.Exercise">
+        <MappingFragment StoreEntitySet="Exercise">
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Activity" ColumnName="Activity" />
+          <ScalarProperty Name="Internal_ID" ColumnName="Internal_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BloodPressure">
+      <EntityTypeMapping TypeName="HealthAnalyserModel.BloodPressure">
+        <MappingFragment StoreEntitySet="BloodPressure">
+          <ScalarProperty Name="Pulse" ColumnName="Pulse" />
+          <ScalarProperty Name="Diastolic" ColumnName="Diastolic" />
+          <ScalarProperty Name="Systolic" ColumnName="Systolic" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Internal_ID" ColumnName="Internal_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Weight">
+      <EntityTypeMapping TypeName="HealthAnalyserModel.Weight">
+        <MappingFragment StoreEntitySet="Weight">
+          <ScalarProperty Name="WeightValue" ColumnName="WeightValue" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Internal_ID" ColumnName="Internal_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WeightGoal">
+      <EntityTypeMapping TypeName="HealthAnalyserModel.WeightGoal">
+        <MappingFragment StoreEntitySet="WeightGoal">
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="MaxValue" ColumnName="MaxValue" />
+          <ScalarProperty Name="MinValue" ColumnName="MinValue" />
+          <ScalarProperty Name="InitialValue" ColumnName="InitialValue" />
+          <ScalarProperty Name="Internal_ID" ColumnName="Internal_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

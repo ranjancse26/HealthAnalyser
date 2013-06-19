@@ -1,0 +1,93 @@
+﻿@model HealthAnalyser.Models.BloodPressureDataViewModel
+@{
+    ViewBag.Title = "Blood Pressure Data";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <h2>Analyse your Health with Chart JS</h2>
+        </div>
+     </section>
+}  
+@{
+    var grid = new WebGrid(Model.BloodPressureDataEntity, canPage: false, canSort: false);
+}
+
+<script src="~/Scripts/HealthAnalyserChart.js"></script>
+
+<script type="text/javascript">
+
+    var ChartData = {
+        labels: @Html.Raw(@Model.BloodPressureDataChart.Labels),
+         datasets: [
+             {
+                 fillColor: "rgba(220,220,220,0.5)",
+                 strokeColor: "rgba(220,220,220,1)",
+                 data: @Model.BloodPressureDataChart.SystolicData
+                 },
+			    {
+                    fillColor : "rgba(151,187,205,0.5)",
+                    strokeColor : "rgba(151,187,205,1)",
+                    data : @Model.BloodPressureDataChart.PulseData
+                },
+                {
+                    fillColor : "rgba(151,187,205,0.5)",
+                    strokeColor : "rgba(151,187,205,1)",
+                    data : @Model.BloodPressureDataChart.DiastolicData
+				}            
+         ]         
+    }
+
+ </script>
+
+@using (Html.BeginForm())
+{   
+    <h2> Blood Pressure Data Analysis</h2> <br />    
+   
+    <ul class="nav nav-pills">
+      <li><a href="#" class="btn btn-large btn-primary"  onclick="return ShowBarGraph();" style="color:white">Show Bar Graph</a></li>
+      <li><a href="#" class="btn btn-large btn-primary"  onclick="return ShowLineGraph();" style="color:white">Show Line Graph</a></li>
+      <li><a href="#" class="btn btn-large btn-primary"  onclick="return ShowRadarGraph();" style="color:white">Show Radar Graph</a></li>
+    </ul>
+    <br />  
+    
+    if (Model.BloodPressureDataEntity.Count == 0)
+    {
+        <p>No data found</p>
+    }
+    else
+    {   
+        @grid.GetHtml(htmlAttributes: new { id = "grid" },
+                    tableStyle: "responsive",
+                    columns: grid.Columns(
+                        grid.Column("Date", format: @<text>@item.Date</text>),
+                        grid.Column("Systolic", format: @<text>@item.Systolic</text>),
+                        grid.Column("Diastolic", format: @<text>@item.Diastolic</text>),
+                        grid.Column("Pulse", format: @<text>@item.Pulse</text>)
+                        )
+                    )
+        <div id="main" role="main">
+            <canvas id="myChart" width="100" height="100"></canvas>  
+        </div>
+    }
+    <label id="errorMessage" style="color:red">@ViewBag.Error</label>
+}
+
+<style type="text/css">
+    .table
+    {
+        width: 40%;
+        border: 0px;
+        border-collapse: collapse;
+    }
+
+     #main{ display:block; width:80%;  height:300px; }
+
+     .nav>li>a:hover, .nav>li>a:focus {
+        text-decoration: none;
+        background-color: #04c;
+     }
+</style>
+
+
+@*http://ameijer.nl/2011/08/resizable-html5-canvas/ - Responsive Canvas*@

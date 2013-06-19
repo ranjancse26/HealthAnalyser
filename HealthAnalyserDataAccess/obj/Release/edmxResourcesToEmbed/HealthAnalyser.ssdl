@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HealthAnalyserModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="HealthAnalyserModelStoreContainer">
+    <EntitySet Name="BloodPressure" EntityType="HealthAnalyserModel.Store.BloodPressure" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Exercise" EntityType="HealthAnalyserModel.Store.Exercise" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SleepData" EntityType="HealthAnalyserModel.Store.SleepData" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Weight" EntityType="HealthAnalyserModel.Store.Weight" store:Type="Tables" store:Schema="dbo" store:Name="Weight">
+      <DefiningQuery>SELECT 
+      [Weight].[Internal_ID] AS [Internal_ID], 
+      [Weight].[Date] AS [Date], 
+      [Weight].[Time] AS [Time], 
+      [Weight].[WeightValue] AS [WeightValue]
+      FROM [dbo].[Weight] AS [Weight]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="WeightGoal" EntityType="HealthAnalyserModel.Store.WeightGoal" store:Type="Tables" store:Schema="dbo" store:Name="WeightGoal">
+      <DefiningQuery>SELECT 
+      [WeightGoal].[Internal_ID] AS [Internal_ID], 
+      [WeightGoal].[InitialValue] AS [InitialValue], 
+      [WeightGoal].[MinValue] AS [MinValue], 
+      [WeightGoal].[MaxValue] AS [MaxValue], 
+      [WeightGoal].[Date] AS [Date], 
+      [WeightGoal].[Time] AS [Time]
+      FROM [dbo].[WeightGoal] AS [WeightGoal]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+  <EntityType Name="BloodPressure">
+    <Key>
+      <PropertyRef Name="Internal_ID" />
+    </Key>
+    <Property Name="Internal_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Systolic" Type="int" Nullable="false" />
+    <Property Name="Diastolic" Type="int" Nullable="false" />
+    <Property Name="Pulse" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Exercise">
+    <Key>
+      <PropertyRef Name="Internal_ID" />
+    </Key>
+    <Property Name="Internal_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Activity" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Time" Type="time" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="500" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+    <Property Name="Distance" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SleepData">
+    <Key>
+      <PropertyRef Name="Internal_ID" />
+    </Key>
+    <Property Name="Internal_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SleepingDateTime" Type="datetime" Nullable="false" />
+    <Property Name="SleepMinutes" Type="int" Nullable="false" />
+    <Property Name="SettlingMinutes" Type="int" Nullable="false" />
+    <Property Name="Walk" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'HealthAnalyser.dbo.Weight' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="Weight">
+    <Key>
+      <PropertyRef Name="Internal_ID" />
+      <PropertyRef Name="Date" />
+      <PropertyRef Name="Time" />
+      <PropertyRef Name="WeightValue" />
+    </Key>
+    <Property Name="Internal_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Time" Type="time" Nullable="false" />
+    <Property Name="WeightValue" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'HealthAnalyser.dbo.WeightGoal' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="WeightGoal">
+    <Key>
+      <PropertyRef Name="Internal_ID" />
+      <PropertyRef Name="InitialValue" />
+      <PropertyRef Name="MinValue" />
+      <PropertyRef Name="MaxValue" />
+      <PropertyRef Name="Date" />
+      <PropertyRef Name="Time" />
+    </Key>
+    <Property Name="Internal_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="InitialValue" Type="int" Nullable="false" />
+    <Property Name="MinValue" Type="int" Nullable="false" />
+    <Property Name="MaxValue" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Time" Type="time" Nullable="false" />
+  </EntityType>
+</Schema>
