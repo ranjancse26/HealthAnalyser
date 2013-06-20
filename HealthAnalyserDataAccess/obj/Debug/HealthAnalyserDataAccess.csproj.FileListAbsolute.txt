@@ -5,3 +5,4 @@ C:\Users\Intel\Documents\Visual Studio 2012\Projects\HealthAnalyser\HealthAnalys
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\HealthAnalyser\HealthAnalyserDataAccess\bin\Debug\EntityFramework.xml
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\HealthAnalyser\HealthAnalyserDataAccess\obj\Debug\HealthAnalyserDataAccess.dll
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\HealthAnalyser\HealthAnalyserDataAccess\obj\Debug\HealthAnalyserDataAccess.pdb
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\HealthAnalyser\HealthAnalyserDataAccess\obj\Debug\HealthAnalyserDataAccess.csprojResolveAssemblyReference.cache
