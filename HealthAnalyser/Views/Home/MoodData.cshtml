@@ -1,0 +1,115 @@
+﻿@model HealthAnalyser.Models.MoodDataViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+@{
+    var grid = new WebGrid(Model.MoodViewModelEntity, canPage: false, canSort: false);
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <h2>Analyse your Health with Chart JS</h2>
+        </div>
+     </section>
+}
+
+<h2>Mood Data Analysis</h2>
+
+<h4>Please get registered in <a href="http://www.moodpanda.com/">http://www.moodpanda.com/</a> and post moods.</h4> <br />
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="editor-label">
+            @Html.LabelFor(model => model.MoodDataEntity.UserId)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.MoodDataEntity.UserId)
+        @Html.ValidationMessageFor(model => model.MoodDataEntity.UserId)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.MoodDataEntity.FromDate)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.MoodDataEntity.FromDate)
+        @Html.ValidationMessageFor(model => model.MoodDataEntity.FromDate)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.MoodDataEntity.ToDate)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.MoodDataEntity.ToDate)
+        @Html.ValidationMessageFor(model => model.MoodDataEntity.ToDate)
+    </div>
+    <p>
+        <input type="submit" value="Get Mood Data" class="btn btn-large btn-primary" />
+    </p>
+}
+
+<script src="~/Scripts/HealthAnalyserChart.js"></script>
+
+<script type="text/javascript">
+
+    var ChartData = {
+        labels: @Html.Raw(@Model.MoodDataViewForChart.Labels),
+         datasets: [
+             {
+                 fillColor: "rgba(220,220,220,0.5)",
+                 strokeColor: "rgba(220,220,220,1)",
+                 data: @Model.MoodDataViewForChart.RatingData
+                 }
+         ]         
+    }   
+ 
+ </script>
+
+
+@using (Html.BeginForm())
+{         
+    if (Model.MoodViewModelEntity.Count == 0)
+    {
+        <p>No data found</p>
+    }
+    else
+    {   
+        @grid.GetHtml(htmlAttributes: new { id = "grid" },
+                    tableStyle: "responsive",
+                    columns: grid.Columns(
+                        grid.Column("Time", format: @<text>@item.Time</text>),                      
+                        grid.Column("Rating", format: @<text>@item.Rating</text>),
+                        grid.Column("Reason", format: @<text>@item.Reason</text>)
+                        )
+                    )
+
+         <ul class="nav nav-pills">
+          <li><a href="#" class="btn btn-large btn-primary"  onclick="return ShowBarGraph();" style="color:white">Show Bar Graph</a></li>
+          <li><a href="#" class="btn btn-large btn-primary"  onclick="return ShowLineGraph();" style="color:white">Show Line Graph</a></li>
+          <li><a href="#" class="btn btn-large btn-primary"  onclick="return ShowRadarGraph();" style="color:white">Show Radar Graph</a></li>
+        </ul>
+        <br />  
+        <div id="main" role="main">
+            <canvas id="myChart" width="100" height="100"></canvas>  
+        </div>
+    }
+    <label id="errorMessage" style="color:red">@ViewBag.Error</label>
+}
+
+<style type="text/css">
+    .table
+    {
+        width: 40%;
+        border: 0px;
+        border-collapse: collapse;
+    }
+
+     #main{ display:block; width:80%;  height:300px; }
+
+     .nav>li>a:hover, .nav>li>a:focus {
+        text-decoration: none;
+        background-color: #04c;
+     }
+</style>
